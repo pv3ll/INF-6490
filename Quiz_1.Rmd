@@ -1,0 +1,93 @@
+---
+## Please provide your name and the date below. This quiz is due September 17 at 11:59 PM.
+
+title: "Quiz 1: Lets Clean Some Data"
+output: html_document
+date: 9/10/2025 
+name: Pearl Vang
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## In this quiz, we will focus on data cleaning to ensure that dataset is primed for statistical analysis. For this quiz, we will be using the Iris Dataset which is commonly used for understanding how statistics and data analysis are applied using statistical tools like R. Please use the provided dataset to complete each of the partially provided code blocks below. Upon completion, upload and submit .Rmd file to Canvas.
+
+----
+
+Load in the Required Libraries
+```{r}
+# Load in the required libraries by running the code block:
+
+library(readr) # Reads in CSV files
+library(janitor) # Cleaning column names, detecting duplicates, and checking for missing values
+library(dplyr) # Makes it easy to filter, select, mutate, and arrange data
+library (tidyr) # Helps with data tidying and reshaping
+library(lubridate) # Simplifies working with dates and time
+library(stringr) # Works with strings, pattern matching, extraction, and replacement
+
+```
+
+Loading in the Dataset
+```{r}
+# Load in the dataset by running the code block:
+
+data <- data("iris") 
+
+```
+
+Inspecting the data involves examining the dataset to understand its characteristics, identify potential issues, and gain insights into its distribution and relationships. This step is essential for ensuring data quality and making informed decisions during the analysis process.
+```{r}
+# Inspect the data by running the code block:
+
+head(iris)
+str(iris)
+summary(iris)
+
+```
+
+Inspecting missing values involves identifying and understanding the presence of missing data points within a dataset. This step is crucial because missing data can significantly impact the accuracy and reliability of your analysis. By identifying missing values, you can make informed decisions about how to handle them, such as imputation or removal, to ensure data quality and avoid biased results.
+```{r}
+# Handle the missing values. Provide the required code and run the code block:
+
+data <- na.omit(iris)
+
+
+```
+
+Converting data types refers to the process of changing the format of data from one type to another. This is necessary to ensure that data is in the correct format for analysis and calculations.
+
+```{r}
+# Convert the required column to numeric. Provide the required code and run the code block:
+
+data$Species <- is.numeric(data$Species)
+
+
+```
+
+Standardizing data is a process of transforming data to a common scale, typically with a mean of 0 and a standard deviation of 1. This is done to ensure that features are comparable and have a similar impact on the analysis.
+
+```{r}
+# Normalize or standardize data to a common scale. Provide the required code and run the code block:
+
+data$Species <- scale(data$Species)
+
+
+
+```
+
+Outliers are data points that significantly deviate from the majority of the data. They can have a substantial impact on statistical analysis, potentially skewing results and leading to inaccurate conclusions. Therefore, it's crucial to identify and handle outliers appropriately. 
+```{r}
+# Load in the dataset below
+data <- data("iris")
+# Calculate the Z-scores
+numeric_iris <- iris[, 1:4]
+Z_scores <- scale(numeric_iris, center = TRUE, scale = TRUE)
+  
+# Identify outliers based on the Z-score
+threshold <- 2
+outliers <- sum(Z_scores) > threshold
+print(outliers)
+
+```
+
