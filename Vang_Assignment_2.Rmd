@@ -1,0 +1,35 @@
+---
+Title: Assignment 2
+Name: Pearl Vang
+---
+Hypothesis: Increase in Unemployment rates correlates with lower House Price Index Scores
+---
+Load in the required libraries and dataset
+
+```{r}
+library(readxl)
+library(Hmisc)
+library(ggpubr)
+
+
+data_set <- read_excel("C:\\Users\\Pearl\\OneDrive - Wayne State University\\Documents\\Coding\\Annual_Macroeconomic_Factors.xlsx")
+```
+
+Create a summary of the dataset for House Price Index and Unemployment Rates
+
+```{r}
+describe(data_set$House_Price_Index)
+describe(data_set$Unemployment_Rate)
+
+```
+
+After research, t-test is not appropriate for analyzing the correlation between these two variables. I will use cor.test to test the relationship between the two variables and visualize it as a scatterplot.
+
+```{r}
+cor.test(data_set$House_Price_Index, data_set$Unemployment_Rate, method=c("pearson"))
+ggscatter(data_set, x = "Unemployment_Rate", y = "House_Price_Index",
+          add = "reg.line", conf.int = TRUE,
+          cor.coef = TRUE, cor.method = "pearson",
+          xlab = "Unemployment Rates", ylab = "House Price Index")
+
+```
